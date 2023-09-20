@@ -11,9 +11,6 @@
       <select id="selectBox" onchange="onchange_selectbox()">
         <option value="">select camera</option>
       </select>
-      <div>
-        <button onclick="reflesh()">reflesh</button>
-      </div>
     </div>
     <script>
       const selectbox=document.getElementById("selectBox");
@@ -34,17 +31,6 @@
         });
       }
 
-      function reflesh(){
-        navigator.mediaDevices.enumerateDevices().then((devices) => {
-        const videoDevices = devices.filter((device)=>device.kind==="videoinput");
-        videoDevices.forEach(device => {
-          selectbox.appendChild(new Option(device.label,device.deviceId));
-          console.log(device.label);
-        });
-      }).catch((e) => console.error(e));
-      }
-
-
       navigator.mediaDevices
         .getUserMedia({
           video: true,
@@ -53,7 +39,13 @@
         .then((stream) => {
           video.srcObject = stream;
           video.play();
-          reflesh();
+          navigator.mediaDevices.enumerateDevices().then((devices) => {
+            const videoDevices = devices.filter((device)=>device.kind==="videoinput");
+            videoDevices.forEach(device => {
+              selectbox.appendChild(new Option(device.label,device.deviceId));
+                console.log(device.label);
+              });
+          }).catch((e) => console.error(e));
         })
         .catch((e) => {
           console.log(e);
