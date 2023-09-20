@@ -9,7 +9,7 @@
     <div>
       <video id="video" width="100%" height="100%"></video>
       <select id="selectBox" onchange="onchange_selectbox()">
-        <option value="0">0</option>
+        <option value="">カメラを選択</option>
       </select>
     </div>
     <script>
@@ -18,9 +18,9 @@
 
       navigator.mediaDevices.enumerateDevices().then((devices) => {
         devices.filter((device) => device.kind === 'videoinput').forEach((device) => {
-          selectbox.options.add(new Option(device.deviceId));
+          //selectbox.options.add(new Option(device.deviceId));
+          console.log(device.label);
         });
-        onchange_selectbox();
       }).catch((e) => console.error(e));
 
       function onchange_selectbox(){
