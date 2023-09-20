@@ -19,7 +19,7 @@
       function onchange_selectbox(){
         navigator.mediaDevices
         .getUserMedia({
-          video: {deviceId:selectbox.options[selectbox.selectedIndex].value},
+          video: {deviceId:selectbox.options[selectbox.selectedIndex].value,width:1920,height:1080},
           audio: false,
         })
         .then((stream) => {
