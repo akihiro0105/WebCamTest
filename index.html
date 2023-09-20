@@ -18,7 +18,7 @@
 
       navigator.mediaDevices.enumerateDevices().then((devices) => {
         devices.filter((device) => device.kind === 'videoinput').forEach((device) => {
-          //selectbox.options.add(new Option(device.deviceId));
+          selectbox.appendChild(new Option(device.label,device.deviceId));
           console.log(device.label);
         });
       }).catch((e) => console.error(e));
