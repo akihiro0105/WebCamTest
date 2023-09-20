@@ -17,7 +17,7 @@
       const video = document.getElementById('video');
 
       navigator.mediaDevices.enumerateDevices().then((devices) => {
-        devices.filter((device) => device.kind === 'videoinput').forEach((device) => {
+        devices.forEach((device) => {
           selectbox.appendChild(new Option(device.label,device.deviceId));
           console.log(device.label);
         });
