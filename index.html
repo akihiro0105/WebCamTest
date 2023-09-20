@@ -18,9 +18,6 @@
     <script>
       const selectbox=document.getElementById("selectBox");
       const video = document.getElementById('video');
-      var deviceinfo=MediaDeviceInfo[0];
-
-      
 
       function onchange_selectbox(){
         navigator.mediaDevices
@@ -40,13 +37,27 @@
       function reflesh(){
         navigator.mediaDevices.enumerateDevices().then((devices) => {
         const videoDevices = devices.filter((device)=>device.kind==="videoinput");
-        deviceinfo=videoDevices;
-        deviceinfo.forEach(device => {
+        videoDevices.forEach(device => {
           selectbox.appendChild(new Option(device.label,device.deviceId));
           console.log(device.label);
         });
       }).catch((e) => console.error(e));
       }
+
+
+      navigator.mediaDevices
+        .getUserMedia({
+          video: true,
+          audio: false,
+        })
+        .then((stream) => {
+          video.srcObject = stream;
+          video.play();
+          reflesh();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     </script>
   </body>
 </html>
