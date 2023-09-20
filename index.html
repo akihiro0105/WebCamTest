@@ -7,16 +7,25 @@
   </head>
   <body>
     <div>
-      <h1>WEBカメラの映像を表示</h1>
-      <div>
-        <video id="video"></video>
-      </div>
+      <video id="video" width="100%" height="100%"></video>
+      <select id="selectBox" onchange="onchange_selectbox()">
+      </select>
     </div>
     <script>
+      const selectbox=document.getElementById("selectBox");
       const video = document.getElementById('video');
-      navigator.mediaDevices
+
+      navigator.mediaDevices.enumerateDevices().then((devices) => {
+        devices.filter((device) => device.kind === 'videoinput').forEach((device) => {
+          selectbox.options.add(new Option(device.label,device.deviceId));
+        });
+        onchange_selectbox();
+      }).catch((e) => console.error(e));
+
+      function onchange_selectbox(){
+        navigator.mediaDevices
         .getUserMedia({
-          video: true,
+          video: {deviceId:selectbox.options[selectbox.selectedIndex].value},
           audio: false,
         })
         .then((stream) => {
@@ -26,6 +35,7 @@
         .catch((e) => {
           console.log(e);
         });
+      }
     </script>
   </body>
 </html>
