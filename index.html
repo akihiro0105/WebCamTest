@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,11 +7,10 @@
   </head>
   <body>
     <div>
-      <video id="video" width="100%" height="100%"></video>
+      <video id="video" width="100%"></video>
       <select id="selectBox" onchange="onchange_selectbox()">
         <option value="">select camera</option>
       </select>
-      <button onclick="onclick_fullscreen()">full screen</button>
     </div>
     <script>
       const selectbox=document.getElementById("selectBox");
@@ -30,10 +29,6 @@
         .catch((e) => {
           console.log(e);
         });
-      }
-
-      function onclick_fullscreen(){
-        video.requestFullscreen();
       }
 
       navigator.mediaDevices
