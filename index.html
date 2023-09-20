@@ -11,6 +11,7 @@
       <select id="selectBox" onchange="onchange_selectbox()">
         <option value="">select camera</option>
       </select>
+      <button onclick="onclick_fullscreen()">full screen</button>
     </div>
     <script>
       const selectbox=document.getElementById("selectBox");
@@ -29,6 +30,10 @@
         .catch((e) => {
           console.log(e);
         });
+      }
+
+      function onclick_fullscreen(){
+        video.requestFullscreen();
       }
 
       navigator.mediaDevices
